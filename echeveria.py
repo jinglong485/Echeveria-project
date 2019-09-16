@@ -9,14 +9,17 @@ def check_time(n):
         return False
 
 def main():
-    sleep_minutes = 0.2
+    sleep_minutes = 20
     flag = False
     
     while True:
         print('Sleeping for {} minutes. Started at {}'.format(sleep_minutes, time.asctime()))
         time.sleep(sleep_minutes*60)
-        flag = check_time(14)
+        for i in range(24):
+        	check_time(i+1)
         if flag == True:
+            get_picture()
+            get_picture()
             get_picture()
             flag = False
         else:
@@ -27,11 +30,9 @@ def get_picture(path = './',folder = 'records/'):
 	if not os.path.exists(folder_path):
 		os.mkdir(folder_path)
 	cap = cv2.VideoCapture(0)
-	time.sleep(0.5)
 	ret, frame = cap.read()
-	time.sleep(0.5)
 	cap.release()
-	file_name = str(time.strftime("%Y-%m-%d_%H:%M:%S",time.localtime())) + '.jpg'
+	file_name = str(time.strftime("%Y-%m-%d_%H-%M-%S",time.localtime())) + '.jpg'
 	whole_file_path = ''.join((folder_path,file_name))
 	print('saving file to: {}'.format(whole_file_path))
 	cv2.imwrite(whole_file_path,frame)

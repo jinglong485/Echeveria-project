@@ -9,15 +9,20 @@ def check_time(n):
         return False
 
 def main():
-    sleep_minutes = 20
+    sleep_minutes = 5
     flag = False
     
     while True:
         print('Sleeping for {} minutes. Started at {}'.format(sleep_minutes, time.asctime()))
         time.sleep(sleep_minutes*60)
+
         for i in range(24):
-        	check_time(i+1)
+        	if check_time(i):
+        		flag = True
+    	#check_time(13)
         if flag == True:
+            get_picture()
+            get_picture()
             get_picture()
             get_picture()
             get_picture()
@@ -35,6 +40,6 @@ def get_picture(path = './',folder = 'records/'):
 	file_name = str(time.strftime("%Y-%m-%d_%H-%M-%S",time.localtime())) + '.jpg'
 	whole_file_path = ''.join((folder_path,file_name))
 	print('saving file to: {}'.format(whole_file_path))
-	cv2.imwrite(whole_file_path,frame)
+	cv2.imwrite(whole_file_path, frame, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 
 main()

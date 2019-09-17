@@ -9,7 +9,7 @@ def check_time(n):
         return False
 
 def main():
-    sleep_minutes = 5
+    sleep_minutes = 15
     flag = False
     
     while True:
@@ -34,9 +34,11 @@ def get_picture(path = './',folder = 'records/'):
 	folder_path = "".join((path,folder))
 	if not os.path.exists(folder_path):
 		os.mkdir(folder_path)
-	cap = cv2.VideoCapture(0)
+	time.sleep(0.5)
+	cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 	ret, frame = cap.read()
 	cap.release()
+	cv2.destroyAllWindows() 
 	file_name = str(time.strftime("%Y-%m-%d_%H-%M-%S",time.localtime())) + '.jpg'
 	whole_file_path = ''.join((folder_path,file_name))
 	print('saving file to: {}'.format(whole_file_path))
